@@ -3,7 +3,7 @@
 import NextLink from "next/link"
 import style from "@/app/page.module.css"
 
-export default function page() {
+export default function AAA() {
   return (
     <div className={style.page}>
       <div className={style.main}>

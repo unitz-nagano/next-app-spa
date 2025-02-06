@@ -28,12 +28,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? ""
+
   // ステートの初期化
   const [id, setId] = useState("")
   const [email, setEmail] = useState("")
   const [givenName, setGivenName] = useState("")
-  const [accessToken, setAccessToken] = useState("")
-  const [refreshToken, setRefreshToken] = useState("")
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   // Googleログインの設定
@@ -80,8 +80,8 @@ export default function RootLayout({
     <html lang="jp">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <div className="max-w-5xl m-auto mt-10">
-          <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
-            <p className="mb-6">GOOGLE_CLIENT_ID:{process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}</p>
+          <GoogleOAuthProvider clientId={clientId}>
+            <p className="mb-6">GOOGLE_CLIENT_ID:{clientId}</p>
             <GoogleLogin onSuccess={responseGoogle} locale="jp" />
             <dl className="flex mt-6">
               <dt className="w-48">user_id</dt>
