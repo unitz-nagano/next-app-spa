@@ -14,12 +14,14 @@ const nextConfig: NextConfig = {
   distDir: "dist",
 
   env: {
-    baseURL:
+    BASE_URL:
       process.env.baseURL === "stg"
         ? "http://staging.example.com/api"
         : process.env.APP_ENV === "prod"
         ? "http://api.example.com"
         : "http://localhost:8000",
+    GOOGLE_CLIENT_ID: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
   },
 }
 

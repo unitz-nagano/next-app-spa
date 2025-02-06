@@ -1,9 +1,29 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 "use client"
+import axios from "axios"
 
 import NextLink from "next/link"
 import style from "@/app/page.module.css"
-
+import {
+  GoogleOAuthProvider,
+  useGoogleLogin,
+  GoogleLogin,
+  hasGrantedAllScopesGoogle,
+} from "@react-oauth/google"
 export default function Home() {
+  const googleLogin = useGoogleLogin({
+    flow: "auth-code",
+    onSuccess: async (codeResponse) => {
+      console.log(codeResponse)
+      const tokens = await axios.post("http://localhost:3000/", {
+        code: codeResponse.code,
+      })
+
+      console.log(tokens)
+    },
+    onError: (errorResponse) => console.log(errorResponse),
+  })
   return (
     <div className={style.page}>
       <div className={style.main}>
@@ -22,6 +42,8 @@ export default function Home() {
             <NextLink href="/bbb">BBB</NextLink>
           </li>
         </ul>
+
+        <button onClick={() => googleLogin()}>Googleでログイン</button>
       </div>
     </div>
   )
